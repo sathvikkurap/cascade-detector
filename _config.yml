@@ -1,0 +1,37 @@
+# Jekyll configuration for GitHub Pages
+site.name: Cascade Detector
+theme: jekyll-theme-slate
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+title: Cascade Detector - Advanced API Secret Detection & Remediation
+description: Detect, verify, and remediate compromised API secrets across 79+ services with intelligent cascade mapping and automated fixes.
+url: https://sathvikkurap.github.io/cascade-detector
+author: Cascade Detector Contributors
+
+# Analytics (optional - can be enabled)
+google_analytics:
+  enabled: false
+
+# Navigation
+navigation:
+  - title: Home
+    url: /
+  - title: Quick Start
+    url: /QUICKSTART
+  - title: Installation
+    url: /INSTALLATION
+  - title: Features
+    url: /FEATURE_SHOWCASE
+  - title: API Coverage
+    url: /API_COVERAGE_REPORT
+  - title: FAQ
+    url: /FAQ
+  - title: Contributing
+    url: /CONTRIBUTING
+  - title: GitHub
+    url: https://github.com/sathvikkurap/cascade-detector
+
+# Markdown processor
+markdown: kramdown
