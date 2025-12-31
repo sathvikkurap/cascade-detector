@@ -1,0 +1,146 @@
+# Default configuration for Cascade Detector
+
+# Scanner settings
+scanner:
+  # Maximum depth for dependency/fork traversal
+  max_depth: 5
+  
+  # Entropy threshold for potential secrets (bits/char)
+  entropy_threshold: 7.5
+  
+  # Timeout for HTTP verification requests (seconds)
+  verification_timeout: 5
+  
+  # Maximum number of commits to scan
+  max_commits: 10000
+  
+  # File patterns to include
+  include_patterns:
+    - "*.py"
+    - "*.js"
+    - "*.ts"
+    - "*.java"
+    - "*.go"
+    - "*.rs"
+    - "*.sh"
+    - "*.env"
+    - "*.properties"
+    - "*.yaml"
+    - "*.yml"
+    - "*.json"
+    - "package.json"
+    - "package-lock.json"
+    - "yarn.lock"
+    - "requirements.txt"
+    - "Pipfile"
+    - "poetry.lock"
+    - "Gemfile"
+    - "Gemfile.lock"
+    - "pom.xml"
+    - "build.gradle"
+    - ".env"
+    - ".env.example"
+
+# LLM settings
+llm:
+  provider: "ollama"  # ollama, openai, anthropic
+  model: "mistral"
+  base_url: "http://localhost:11434"
+  temperature: 0.3
+  top_p: 0.9
+  max_tokens: 1024
+
+# GitHub API settings
+github:
+  # Use GITHUB_TOKEN environment variable for authentication
+  api_version: "graphql"  # v3 or graphql
+  rate_limit_delay: 1  # seconds between requests
+  
+  # Parallel requests
+  max_concurrent: 5
+
+# Agent settings
+agents:
+  discovery:
+    enabled: true
+    # Number of patterns to use
+    pattern_count: 500
+    # Use entropy scoring
+    entropy_check: true
+    # Use LLM for context analysis
+    llm_analysis: true
+    
+  propagation:
+    enabled: true
+    # Include transitive dependencies
+    transitive_deps: true
+    # Include fork networks
+    include_forks: true
+    # Maximum traversal depth
+    max_depth: 5
+    
+  verifier:
+    enabled: true
+    # Require consensus from multiple sources
+    require_consensus: true
+    # Minimum confidence score (0-1)
+    min_confidence: 0.8
+    # Supported providers for verification
+    providers:
+      - "aws"
+      - "github"
+      - "npm"
+      - "pypi"
+      - "docker"
+    
+  remediator:
+    enabled: true
+    # Test patches before creating PR
+    test_patch: true
+    # Run linting on patched files
+    run_lint: true
+    # Require human approval for PR
+    require_approval: true
+    # Target branch for PRs
+    target_branch: "main"
+
+# Sandbox settings
+sandbox:
+  # Use Docker for verification
+  enabled: true
+  image: "cascade-detector:latest"
+  timeout: 30  # seconds
+
+# Output settings
+output:
+  # Format: json, html, markdown, mermaid
+  formats:
+    - json
+    - html
+    - mermaid
+  
+  # Output directory
+  directory: "./reports"
+  
+  # Include detailed evidence
+  include_evidence: true
+  
+  # Include raw hashes
+  include_hashes: true
+
+# Logging settings
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: "json"  # json, text
+  file: "cascade-detector.log"
+
+# Performance settings
+performance:
+  # Number of worker threads
+  workers: 4
+  # Batch size for processing
+  batch_size: 100
+  # Cache directory
+  cache_dir: "./.cache"
+  # Cache TTL (seconds)
+  cache_ttl: 3600

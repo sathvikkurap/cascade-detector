@@ -1,0 +1,102 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cascade-detector"
+version = "0.1.0"
+description = "AI-Powered Secret Cascade Detector - scans repos for leaked secrets and traces propagation"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "Sathvik Kurapati", email = "sathvik@example.com"}]
+keywords = ["security", "secrets", "detection", "cascade-mapping", "git", "github"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+    "Topic :: System :: Systems Administration",
+]
+
+dependencies = [
+    "gitpython>=3.1.40",
+    "networkx>=3.3",
+    "requests>=2.31.0",
+    "pydantic>=2.5.3",
+    "pyyaml>=6.0.1",
+    "langchain>=0.1.9",
+    "langgraph>=0.0.20",
+    "ollama>=0.0.56",
+    "entropy>=0.0.3",
+    "regex>=2023.12.25",
+    "pygithub>=2.1.1",
+    "pandas>=2.1.4",
+    "numpy>=1.26.3",
+    "mermaid>=0.0.2",
+    "streamlit>=1.31.1",
+    "click>=8.1.7",
+    "rich>=13.7.0",
+    "python-dotenv>=1.0.0",
+    "docker>=7.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.4",
+    "pytest-cov>=4.1.0",
+    "pytest-asyncio>=0.23.2",
+    "pytest-mock>=3.13.0",
+    "black>=23.12.1",
+    "flake8>=6.1.0",
+    "mypy>=1.8.0",
+    "isort>=5.13.2",
+]
+
+[project.scripts]
+cascade-detector = "cascade_detector.cli.main:cli"
+
+[project.urls]
+Homepage = "https://github.com/sathvikkurapati/cascade-detector"
+Documentation = "https://github.com/sathvikkurapati/cascade-detector/wiki"
+Repository = "https://github.com/sathvikkurapati/cascade-detector.git"
+Issues = "https://github.com/sathvikkurapati/cascade-detector/issues"
+
+[tool.black]
+line-length = 100
+target-version = ['py311', 'py312']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 100
+multi_line_mode = 3
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=cascade_detector --cov-report=html --cov-report=term-missing"
